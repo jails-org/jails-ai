@@ -1,4 +1,7 @@
-# jails-ai
+<div align="center">
+    <img width="400" height="185" src="https://github.com/user-attachments/assets/16882583-c5cb-416e-bc1a-58ce316cbc75" />
+    <h1>jails-ai</h1>
+</div>
 
 A collection of Agent Skills for building front-end applications with lightweight technologies and architectural conventions. It follows the open [Agent Skills specification](https://agentskills.io/specification) and the `skills/<name>/` structure used by [Javiani/agent-skills](https://github.com/Javiani/agent-skills), compatible with the [Vercel skills CLI](https://github.com/vercel-labs/skills).
 

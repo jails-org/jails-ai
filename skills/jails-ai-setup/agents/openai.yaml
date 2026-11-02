@@ -1,0 +1,4 @@
+interface:
+  display_name: "jails-ai-setup"
+  short_description: "Scaffold applications from the Jails Starter-Kit"
+  default_prompt: "Use $jails-ai-setup to choose a project location and scaffold my application from jails-org/Starter-Kit."

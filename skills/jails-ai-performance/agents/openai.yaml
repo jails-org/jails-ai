@@ -1,0 +1,4 @@
+interface:
+  display_name: "jails-ai-performance"
+  short_description: "Diagnose loading, responsiveness, and layout stability"
+  default_prompt: "Use $jails-ai-performance to ask what I want to improve, explore the application when needed, and diagnose and fix performance issues using Core Web Vitals evidence."

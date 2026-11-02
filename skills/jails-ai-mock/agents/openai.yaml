@@ -1,0 +1,4 @@
+interface:
+  display_name: "jails-ai-mock"
+  short_description: "Create JSON mocks for dynamic screen data"
+  default_prompt: "Use $jails-ai-mock to ask about my response contract or dynamic screen data, create the JSON fixture in public/mocks/<domain>/, and show me its structure."

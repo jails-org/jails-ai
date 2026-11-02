@@ -1,0 +1,4 @@
+interface:
+  display_name: "jails-ai-spec"
+  short_description: "Build from specs or extract a PRD from existing code"
+  default_prompt: "Use $jails-ai-spec to specify and implement pages or behavior, or extract existing project documentation into a domain-organized specification/ directory, according to my request."

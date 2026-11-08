@@ -37,6 +37,10 @@ Before implementation, record a concise section-to-file map: the screen domain, 
 
 Implement the page through these boundaries from the start. Do not build the entire screen in one Astro/HTML file as an intermediate shortcut and leave extraction for later. The route delegates, the domain index composes, and section Components own their markup and local behavior. A static page still requires structural decomposition; absence of JavaScript does not make section boundaries optional.
 
+## Image-based references
+
+For screenshots or layout images, read [the visual reproduction workflow](visual-reproduction.md). Measure the reference before coding, reproduce its content and geometry within the shared standards, and use controlled browser captures and regional comparisons to correct discrepancies. A passing build or a subjective visual estimate does not establish 95% similarity.
+
 ## Build the page
 
 1. Implement the section-to-file map: create a folder and index entry for each structural Component, then import and render those Components in the domain entrypoint. Keep the route thin and the domain index focused on composition, following the application's Astro conventions. Reuse shared layouts and components where their contracts fit; do not move screen-exclusive resources into shared or import another domain.

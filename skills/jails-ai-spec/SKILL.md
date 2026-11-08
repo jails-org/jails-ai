@@ -1,6 +1,6 @@
 ---
 name: jails-ai-spec
-description: Specify and implement pages, behavior, and rules from requirements or design references, or extract a PRD/documentation from an existing application. Maintain domain-organized documentation in the project-root specification/ directory using UI Clean Architecture and Jails guidance.
+description: Specify and implement pages, behavior, and rules from requirements, screenshots, layout images, or design references with measured visual verification, or extract a PRD/documentation from an existing application. Maintain domain-organized documentation in the project-root specification/ directory using UI Clean Architecture and Jails guidance.
 ---
 
 # jails-ai Spec
@@ -26,6 +26,12 @@ Read supplied documents and text, inspect images visually, and open referenced p
 Identify the route, screen purpose, meaningful sections, content, assets, responsive layout, interactions, data sources, and applicable loading, empty, error, and success states. Separate explicit requirements, observable visual details, and assumptions. Do not infer hidden interactions or backend contracts from a static image.
 
 If sources are inaccessible, request the needed text, export, image, or access and report what could not be inspected. Continue independent work supported by accessible inputs without inventing missing evidence. Clarify conflicting references or missing product decisions that materially affect implementation; resolve routine implementation details from the existing application and architecture.
+
+## Reproduce a screenshot or layout image
+
+When an image supplies the target layout, read [the visual reproduction workflow](references/visual-reproduction.md) before implementing. It defines reference measurements, asset and font matching, controlled browser captures, regional comparisons, and a correction loop targeting at least 95% measured similarity. Apply it alongside the page implementation workflow and architecture standards.
+
+Treat 95% as a verification target, never a promise inferred from appearance. Record the metric and evidence; without comparable captures and an executed comparison, report fidelity as unverified. Preserve shared styling constraints and disclose any constraint preventing the target.
 
 ## Locate the application and understand the scope
 
@@ -91,7 +97,7 @@ For extraction-only work, review document organization, evidence, links, and req
 
 For implementation work, apply the checks below.
 
-Verify observable outcomes against the specification's visual and behavioral acceptance criteria. For pages, compare the implemented route with accessible design references at relevant viewport sizes and check keyboard use, focus, form feedback, state-to-DOM updates, and applicable UI states. Reconcile each mapped section with its actual structural Component and extract any section implementations left in the route or domain index before delivery. Add or update meaningful behavior tests using existing project conventions, including relevant failure, propagation, and persistence cases. Run applicable checks; use browser verification for changed UI when available. Check imports and actual abstraction boundaries against `ui-clean-arch`.
+Verify observable outcomes against the specification's visual and behavioral acceptance criteria. For pages supplied as screenshots or layout images, complete the visual reproduction workflow and retain its comparison evidence. For pages, compare the implemented route with accessible design references at relevant viewport sizes and check keyboard use, focus, form feedback, state-to-DOM updates, and applicable UI states. Reconcile each mapped section with its actual structural Component and extract any section implementations left in the route or domain index before delivery. Add or update meaningful behavior tests using existing project conventions, including relevant failure, propagation, and persistence cases. Run applicable checks; use browser verification for changed UI when available. Check imports and actual abstraction boundaries against `ui-clean-arch`.
 
 Reconcile the affected `specification/` documents and indexes with the final implementation: screen requirements, rule text, inspected references, resolved questions, source mapping, and any recorded status must be accurate. If the behavior already existed, document it and verify it instead of making unnecessary code changes.
 

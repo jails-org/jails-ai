@@ -13,6 +13,8 @@ Prepare an executable foundation with UI Clean Architecture, Jails for interface
 
 Before creating or modifying interface styles, read and apply [the shared Tailwind standard](references/standards/tailwind.md). Include the shared Tailwind and SVG/icon conventions in the generated application's architecture or styling documentation.
 
+When creating or modifying Jails UI, read and apply [the Jails initial rendering standard](references/standards/jails-rendering.md).
+
 ## Shared SVG and icon convention
 
 Read and apply [the shared SVG and icon standard](references/standards/icons.md) before creating or modifying UI. Inspect and reuse `src/shared/components/icon/index.astro` and `public/icons/` from the scaffold, or recreate the component using the base repository's pattern if absent. Render SVGs through that component. When adapting existing HTML, extract embedded SVGs into the corresponding asset files and replace them with Icon usages. Verify asset resolution and rendered appearance before delivery.

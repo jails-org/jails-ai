@@ -134,7 +134,7 @@ All UI skills follow the [shared SVG and icon standard](standards/icons.md). Ren
 
 ## Shared standards
 
-Architecture and implementation conventions shared by all jails-ai skills live in `standards/`. The [UI Clean Architecture acceptance criteria](standards/ui-clean-architecture.md) require a section-to-file map, separate structural Components, and a source-level architecture review before delivery. The [Tailwind portability standard](standards/tailwind.md) requires built-in classes and explicit developer instructions for customizations.
+Architecture and implementation conventions shared by all jails-ai skills live in `standards/`. The [UI Clean Architecture acceptance criteria](standards/ui-clean-architecture.md) require a section-to-file map, separate structural Components, and a source-level architecture review before delivery. The [Tailwind portability standard](standards/tailwind.md) requires built-in classes and explicit developer instructions for customizations. The [Jails initial rendering standard](standards/jails-rendering.md) prevents initially closed modals and conditional notices from flashing before initialization.
 
 [AGENTS.md](AGENTS.md) defines how contributors and agents apply these standards to existing and future skills. Skills that create or modify UI must link to their bundled Tailwind reference and read it before styling.
 

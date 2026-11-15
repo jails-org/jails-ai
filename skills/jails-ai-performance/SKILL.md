@@ -39,6 +39,8 @@ For a general review, implement the highest-confidence improvements within the r
 
 Apply [the shared architecture criteria](references/standards/ui-clean-architecture.md) when changing screen code. Resolve `ui-clean-arch` and relevant Jails skills through [the upstream catalog](references/standards/upstream-skills.md) when changing their abstractions or behavior. Preserve section ownership and existing application patterns; performance work does not authorize architectural replacement.
 
+Apply [the Jails initial rendering standard](references/standards/jails-rendering.md) when creating or modifying Jails UI, including when investigating flashes before initialization.
+
 Read [the Tailwind standard](references/standards/tailwind.md) before styling changes and [the SVG/icon standard](references/standards/icons.md) when working with SVGs. Use built-in utilities for layout reservations where suitable and preserve the base Icon rendering boundary.
 
 The supplied font workflow explicitly permits justified font-loading configuration and fallback metric descriptors such as `size-adjust`, `ascent-override`, and `descent-override`. Keep these scoped to the font-loading fix; this does not authorize unrelated Tailwind theme extensions, custom utilities, or visual redesign. Document any portability requirements introduced by the chosen font configuration.

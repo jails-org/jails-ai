@@ -8,6 +8,8 @@ All skills that create or modify UI must read `standards/icons.md` and link to i
 
 Shared architecture and implementation standards belong in `standards/`, independently of any individual skill. Read and apply `standards/tailwind.md` when creating or modifying interface styles.
 
+Skills that create or modify Jails UI must link to and apply `references/standards/jails-rendering.md`, including the initial rendering guidance for modals and conditional notices.
+
 Skills that create or modify screens must also read and apply `standards/ui-clean-architecture.md`, link to its bundled copy, and verify actual structural component boundaries before delivery. Do not treat visual completion or a passing build as proof of architectural compliance.
 
 When creating or updating a skill that generates or modifies UI, link its `SKILL.md` to `references/standards/tailwind.md` and instruct the agent to read it before styling. Keep task-specific workflow in the skill and shared rules in the canonical standard.

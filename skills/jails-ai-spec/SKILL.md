@@ -85,7 +85,7 @@ For screen work, follow [the page implementation workflow](references/page-imple
 
 Create missing components, actions, Services, or Entities according to the responsibility map. Reuse and modify existing implementations when appropriate; do not duplicate working behavior or create empty layers. Limit changes to the specified behavior and necessary integration, preserving unrelated application functionality.
 
-For Jails behavior, read the `jails` skill and relevant `jails-stdlib` references through the upstream catalog. Inspect actual Starter-Kit-derived components, registration, state, and lifecycle examples in the application before coding. Verify installed API contracts instead of guessing from module names. Bridge Store subscriptions to component state and release resources on unmount where applicable.
+For Jails behavior, read the `jails` skill and relevant `jails-stdlib` references through the upstream catalog. Apply [the Jails initial rendering standard](references/standards/jails-rendering.md) when creating or modifying Jails UI. Inspect actual Starter-Kit-derived components, registration, state, and lifecycle examples in the application before coding. Verify installed API contracts instead of guessing from module names. Bridge Store subscriptions to component state and release resources on unmount where applicable.
 
 If UI is created or modified, read [the Tailwind standard](references/standards/tailwind.md) and [the SVG/icon standard](references/standards/icons.md). Preserve structural Component boundaries: route delegation, screen composition in the domain index, and section markup in its owning Component. Use built-in Tailwind classes and the base Icon component, extracting inline SVGs to the template's asset directory.
 

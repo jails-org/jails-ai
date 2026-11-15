@@ -1,158 +1,266 @@
 <div align="center">
-    <img width="400" height="185" src="https://github.com/user-attachments/assets/16882583-c5cb-416e-bc1a-58ce316cbc75" />
-    <h1>jails-ai</h1>
+  <img width="280" alt="jails-logo" src="https://github.com/user-attachments/assets/b121dbd0-4221-4a48-92c6-2a9e4d8ede32" /><strong>.ai</strong><br/><br/>
+  <p><strong>Build more. Keep every change understandable.</strong></p>
+  <p>AI-assisted frontend development with a lightweight stack, clear architectural boundaries,<br />and the developer in control.</p>
+  <p><a href="#quick-start">Quick start</a> · <a href="#the-skills">Skills</a> · <a href="#architecture-that-supports-review">Architecture</a> · <a href="#contributing">Contributing</a></p>
 </div>
 
-A collection of Agent Skills for building front-end applications with lightweight technologies and architectural conventions. It follows the open [Agent Skills specification](https://agentskills.io/specification) and the `skills/<name>/` structure used by [Javiani/agent-skills](https://github.com/Javiani/agent-skills), compatible with the [Vercel skills CLI](https://github.com/vercel-labs/skills).
+## Why Jails.ai
 
-## Available skills
+Code can be generated in seconds. Understanding it takes longer.
 
-| Skill | Responsibility |
-| --- | --- |
-| [jails-ai-setup](skills/jails-ai-setup/SKILL.md) | Scaffold an application from jails-org/Starter-Kit with UI Clean Architecture, Jails, and jails.stdlib. |
-| [jails-ai-spec](skills/jails-ai-spec/SKILL.md) | Specify and build pages and rules, or extract a PRD from an existing project. |
-| [jails-ai-mock](skills/jails-ai-mock/SKILL.md) | Create JSON response fixtures for dynamic screen data and explain their structure. |
-| [jails-ai-performance](skills/jails-ai-performance/SKILL.md) | Diagnose and improve loading, responsiveness, and stability using Core Web Vitals and user journeys. |
+When code arrives faster than people can absorb it, review becomes the bottleneck: large diffs, unclear responsibilities, and changes whose impact is difficult to trace. Without a consistent architecture, each new feature can add another layer of uncertainty for the next developer.
 
-## Install and use
+Jails.ai applies the philosophy of the Jails microframework to AI-assisted application development: simplicity, modularity, performance, and long-term maintainability. It brings together a deliberate stack and shared engineering practices so generated code has a structure developers can inspect and evolve.
 
-From the project where you want to use the skills, install jails-ai using its absolute local path:
+Simple, predictable code gives reviewers less context to reconstruct. Separation of concerns helps them understand what changed and where its effects belong. That supports a more sustainable pace of development as the application grows.
+
+Jails.ai draws on more than 20 years of development experience across projects. Its purpose is to give developers more capacity to build while preserving technical judgment. You direct the work, inspect the result, and decide how the application evolves.
+
+## What this repository provides
+
+This repository is a collection of **Agent Skills**: instructions and on-demand references that guide a coding agent through specific development workflows. It follows the [Agent Skills specification](https://agentskills.io/specification) and works with the [skills CLI](https://github.com/vercel-labs/skills).
+
+The skills coordinate application setup, specifications and implementation, mock responses, and performance investigations. They compose the upstream `ui-clean-arch`, `jails`, and `jails-stdlib` skills rather than duplicating their technical manuals.
+
+The application foundation comes from [jails-org/Starter-Kit](https://github.com/jails-org/Starter-Kit): Astro, TypeScript, Jails, jails.stdlib, Tailwind, Vitest, and Playwright. This distribution repository itself does not contain a generated application or a `jails-ai` terminal executable.
+
+## Quick start
+
+You need Git, Node.js with `npx`, and a coding agent that supports Agent Skills. The generated application's package manager and runtime requirements come from the fetched Starter-Kit.
+
+### 1. Clone the skills repository
+
+```bash
+git clone https://github.com/jails-org/jails-ai.git
+```
+
+### 2. Install into your target workspace
+
+From the project or workspace where you want the skills available, run:
 
 ```bash
 npx skills add /absolute/path/to/jails-ai --skill jails-ai-setup jails-ai-spec jails-ai-mock jails-ai-performance
 npx skills add Javiani/agent-skills --skill ui-clean-arch jails jails-stdlib
 ```
 
-Select your agent in the installer. To inspect the local catalog before installing:
+Replace `/absolute/path/to/jails-ai` with the absolute path to your clone. Select your coding agent in the installer. The second command installs the upstream skills; the CLI does not install them merely because this repository references them.
+
+To inspect the local catalog before installation:
 
 ```bash
 npx skills add /absolute/path/to/jails-ai --list
 ```
 
-In agents that support `$` invocation, use:
+Cloning the repository is not enough to make its skills available to an agent. Run installation from each target workspace where you need them.
+
+### 3. Ask your agent to create an application
+
+In agents supporting dollar mentions:
 
 ```text
 $jails-ai-setup Create the application foundation in ./my-app.
 ```
 
-The stable name `jails-ai-setup` enables discovery in the agent's skill selector. Autocomplete and invocation syntax depend on the client; in Codex clients supporting `$` mentions, look for `$jails-ai-setup`. The skill does not create a terminal executable. Keeping files in `skills/` alone does not install them in an agent.
-
-## VS Code and GitHub Copilot
-
-Install the skills into your target workspace with the skills CLI and select GitHub Copilot. Copilot discovers workspace skills in `.github/skills/`; the distribution source remains in `skills/`.
-
-Open the jails-ai root folder in VS Code, then type `/jails-ai-setup` in Copilot Chat. If it does not appear, run **Developer: Reload Window** and check the Skills section of Agent Customizations. Use an up-to-date VS Code and Copilot version with Agent Skills support.
-
-Run installation from each project where you want the skills to be available. Merely cloning this distribution repository does not install its skills in the agent.
-
-See [the official VS Code Agent Skills documentation](https://code.visualstudio.com/docs/agent-customization/agent-skills) for discovery locations and slash command support.
-
-## Setup workflow
-
-`jails-ai-setup` first asks where to create the application: the current folder, a specific path, or a new folder inside the current directory. An explicit destination already supplied in the request counts as the answer.
-
-It then fetches [jails-org/Starter-Kit](https://github.com/jails-org/Starter-Kit), copies the template including dotfiles without its Git metadata, installs dependencies using its lockfile, and verifies the generated application. Existing files are preserved, and conflicts are resolved with the user before copying.
-
-The starter supplies Astro, TypeScript, Jails, jails.stdlib, Tailwind, Vitest, and Playwright. Setup retains its stack and initial screen unless changes are requested, and records the fetched starter commit in the generated README.
-
-## Page and behavior specification workflow
-
-Use `/jails-ai-spec` or `$jails-ai-spec` for pages, screens, behaviors, and business rules. Supply descriptions, documentation, PRDs, images, or URLs pointing to Figma, written requirements, layout images, or reference pages. The same entrypoint handles both a complete new screen and a focused rule change.
-
-The skill maintains a cumulative `specification/` directory at the target application root. `specification/readme.md` holds the project overview, structural decisions, shared rules, and a domain/page index. Each `specification/<domain>/` folder contains only that domain's requirements, evidence, acceptance criteria, and implementation mapping, starting with its own `readme.md` and splitting into linked topic files when useful. Stable rule IDs, relative links, summaries, and focused retrieval keep context manageable without duplicating rules. Existing `specification.md` content is migrated without losing rules or evidence.
-
-It implements the specification with `ui-clean-arch`, `jails`, and `jails-stdlib`, inspecting the application's Starter-Kit examples first. Page construction requires a section-to-file map, separate structural Components, shared Tailwind/icon standards, and visual and functional verification. A behavior-only request remains scoped to that behavior without unnecessarily rebuilding the page.
+In GitHub Copilot Chat:
 
 ```text
-/jails-ai-spec Extract a PRD from this existing application and organize specification/ into general information and domain/page folders. Do not change application behavior.
-/jails-ai-spec Build an orders page from the attached PRD and layout image.
-/jails-ai-spec When the user changes the category filter, update results and summary without reloading. Reset the filter when leaving the page.
+/jails-ai-setup Create the application foundation in ./my-app.
 ```
 
-For documentation extraction, the skill inventories routes and traces implemented behavior, tests, and available runtime evidence. It records findings in the appropriate general or domain documents under `specification/`, distinguishes confirmed requirements from observed behavior and inferred intent, and tracks uninspected areas. Extraction alone does not authorize application changes; implementation remains a separate mode or an explicitly combined request.
+These are **agent chat instructions**, not shell commands. Invocation syntax and autocomplete depend on the client.
 
-## Mock data workflow
+The setup skill fetches the Starter-Kit, installs its dependencies, and verifies the application. Use the generated application's README for its exact development and verification commands.
 
-Use `/jails-ai-mock` or `$jails-ai-mock` to describe which screen data is dynamic. The skill first asks whether a response contract exists. If it does, it requests the pasted or attached contract; otherwise it asks focused questions about dynamic fields, relationships, types, and relevant scenarios before proposing a structure. It then creates valid JSON in the application's `public/mocks/<domain>/`, using the screen's actual domain name. For example, home screen responses belong in `public/mocks/home/summary.json` and are served at `/mocks/home/summary.json` with the default base path.
+## The skills
 
-It previews the saved JSON in chat, explains important fields and assumptions, and reports validation. Application integration is performed only when requested; future consumption follows the UI Clean Architecture Service boundary.
+| Skill | Use it to | Primary output |
+| --- | --- | --- |
+| [jails-ai-setup](skills/jails-ai-setup/SKILL.md) | Create an application foundation from the Starter-Kit. | A scaffold with its stack, architecture, and source revision documented. |
+| [jails-ai-spec](skills/jails-ai-spec/SKILL.md) | Specify and build screens or behaviors, or document an existing application. | A cumulative `specification/` directory and implementation when requested. |
+| [jails-ai-mock](skills/jails-ai-mock/SKILL.md) | Model dynamic screen data and create response fixtures. | Valid JSON under `public/mocks/<domain>/`. |
+| [jails-ai-performance](skills/jails-ai-performance/SKILL.md) | Investigate and improve loading, responsiveness, and visual stability. | Evidence-based findings and verified, focused fixes. |
+
+The following examples use Copilot's `/` syntax. Use `$` instead in clients that support dollar mentions.
+
+### Set up the foundation
+
+```text
+/jails-ai-setup Create the application foundation in ./my-app.
+```
+
+Setup asks where to create the application unless you already supplied a destination. It fetches the Starter-Kit, copies its contents including dotfiles without importing Git metadata, and installs dependencies using the starter's lockfile. Existing files are preserved; conflicts are resolved with you before copying.
+
+The starter's stack and initial screen remain in place unless you request changes. Setup records the fetched starter commit in the generated README and runs the relevant available checks. The fetched package manifest is the source of truth for build and test commands.
+
+### Specify and build screens or behavior
+
+Provide descriptions, PRDs, documentation, images, or reference URLs, including Figma links.
+
+```text
+/jails-ai-spec Build an orders page from the attached PRD and layout image.
+```
+
+For a focused behavior change:
+
+```text
+/jails-ai-spec When the category filter changes, update the results and summary without reloading. Reset the filter when leaving the page.
+```
+
+For documentation of an existing project:
+
+```text
+/jails-ai-spec Extract a PRD from this application. Organize specification/ into shared information and domain/page folders. Do not change application behavior.
+```
+
+The skill keeps requirements cumulative and scoped:
+
+```text
+specification/
+├── readme.md              # Overview, shared rules, decisions, domain/page index
+└── <domain>/
+    ├── readme.md          # Domain requirements and implementation mapping
+    └── <topic>.md         # Additional linked topics when useful
+```
+
+Stable rule IDs, acceptance criteria, relative links, and implementation mapping keep requirements traceable without duplicating them. Existing `specification.md` content is migrated without losing rules or evidence.
+
+Documentation extraction traces routes, behavior, tests, and available runtime evidence. It distinguishes confirmed requirements, observed behavior, and inferred intent, and records areas that have not been inspected. Extraction alone does not authorize implementation changes.
+
+### Create mock responses
 
 ```text
 /jails-ai-mock Create an orders response for the dynamic order list and summary totals. Propose a contract because the API schema is not defined yet.
 ```
 
-## Performance workflow
+The skill first checks whether a response contract exists. With a contract, it uses the supplied schema. Without one, it asks focused questions about fields, relationships, types, and scenarios before proposing the structure.
 
-Use `/jails-ai-performance` or `$jails-ai-performance` to investigate technical UX and performance problems. It first asks what the developer wants to solve, unless the symptom is already specified. If the developer does not know where to start, it explores representative pages and interactions independently.
+Fixtures live in `public/mocks/<domain>/`. For example, `public/mocks/home/summary.json` is served at `/mocks/home/summary.json` with the default base path.
 
-The investigation follows LCP, INP, and CLS using available field evidence, production-preview browser traces, targeted audits, and source attribution. It also investigates scrolling and animation smoothness without mislabeling those signals as Core Web Vitals. Findings are prioritized by user impact and evidence, then focused fixes are verified under comparable conditions.
+The skill previews the saved JSON, explains important fields and assumptions, and reports validation. Connecting a fixture to the application requires a separate request and follows the Service boundary.
 
-The detailed font-loading workflow remains available for CLS issues. The skill preserves the intended design, does not automatically use `font-display: optional`, and never claims improvement without supporting measurements.
+### Investigate performance
 
 ```text
 /jails-ai-performance The application feels slow, but I do not know where to start. Explore the main pages and interactions, prioritize the causes, and implement focused improvements.
 ```
 
-## Structure
+The skill starts with the reported symptom, or explores representative journeys if the cause is unclear. It investigates Largest Contentful Paint (LCP), Interaction to Next Paint (INP), and Cumulative Layout Shift (CLS), using available field evidence, browser traces, targeted audits, and source attribution.
+
+Scrolling and animation smoothness are investigated separately from Core Web Vitals. Findings are prioritized by user impact and supporting evidence. Improvements require verification under comparable conditions.
+
+For font-related layout shifts, the skill preserves the intended design and does not automatically choose `font-display: optional`.
+
+## Architecture that supports review
+
+A clear architecture gives both the agent and the reviewer a shared map of the application.
+
+| Layer | Responsibility |
+| --- | --- |
+| **Astro** | HTML generation, page structure, and server-side rendering. |
+| **Jails** | Modular interface behavior and lifecycle. |
+| **Tailwind** | UI composition with reusable utility classes. |
+| **Jails.ai skills** | Workflow, architectural conventions, and verification across those pieces. |
+
+The [UI Clean Architecture standard](standards/ui-clean-architecture.md) defines how those responsibilities translate into source boundaries:
+
+- **Routes** delegate to domain screens.
+- **Domain screens** compose meaningful structural Components.
+- **Components** own their section's markup and local behavior.
+- **Stores** coordinate screen state when propagation or persistence is needed.
+- **Services** own external integrations, including network and storage access.
+- **Entities** adapt received data through pure, synchronous functions.
+
+Screen-exclusive resources stay within their domain. Shared resources support reuse across domains. Domains do not import other domains, and shared code does not depend on a domain.
+
+A screen with summary, filters, and results might map to:
 
 ```text
-standards/                  # Canonical shared rules and upstream catalog
-scripts/sync_standards.py    # Bundle shared references into every skill
-skills/
-├── jails-ai-setup/
-│   ├── SKILL.md
-│   ├── agents/openai.yaml
-│   └── references/standards/
-├── jails-ai-spec/
-│   ├── SKILL.md
-│   ├── agents/openai.yaml
-│   └── references/
-│       ├── extract-project.md
-│       ├── page-implementation.md
-│       ├── specification-organization.md
-│       └── standards/
-├── jails-ai-mock/
-│   ├── SKILL.md
-│   ├── agents/openai.yaml
-│   └── references/standards/
-└── jails-ai-performance/
-    ├── SKILL.md
-    ├── agents/openai.yaml
-    └── references/
-        ├── core-web-vitals.md
-        ├── layout-shift.md
-        └── standards/
+src/pages/orders.astro
+src/domain/orders/index.astro
+src/domain/orders/components/summary/index.astro
+src/domain/orders/components/filters/index.astro
+src/domain/orders/components/results/index.astro
 ```
 
-Each skill uses the same folder name and `name`, in kebab-case. Use the `jails-ai-` prefix for skill names. `SKILL.md` describes applicability and workflow. Detailed references are loaded on demand. `agents/openai.yaml` provides optional metadata for OpenAI clients; the core format remains agent independent.
+The screen determines the sections; this is an example, not a required component count. Create abstractions for actual responsibilities, not empty folders to satisfy a diagram.
 
-All project content, including skill instructions, metadata, documentation, and examples, must be written in English.
+Before delivery, the agent maps sections to files, inspects imports and ownership, and traces state, integrations, and data adaptation. A passing build or a finished layout does not replace this source-level review.
 
-## SVG and icon convention
+These boundaries help reviewers locate a change and assess its impact. They still need to validate behavior, tests, and technical decisions. AI-assisted speed is useful when the resulting application remains understandable to the people responsible for it.
 
-All UI skills follow the [shared SVG and icon standard](standards/icons.md). Render SVGs through the Starter-Kit's `src/shared/components/icon/index.astro`, storing SVG files in `public/icons/`. When adapting existing HTML, extract inline SVGs into those files and replace them with the Icon component. If the component is missing, recreate the base repository's pattern.
+## Shared implementation conventions
 
-## Shared standards
+### Portable Tailwind
 
-Architecture and implementation conventions shared by all jails-ai skills live in `standards/`. The [UI Clean Architecture acceptance criteria](standards/ui-clean-architecture.md) require a section-to-file map, separate structural Components, and a source-level architecture review before delivery. The [Tailwind portability standard](standards/tailwind.md) requires built-in classes and explicit developer instructions for customizations.
+Use built-in utilities and variants supported by the installed Tailwind version. Project-specific tokens, utilities, variants, plugins, `@apply` component classes, and styling shortcuts require explicit developer instructions. A visual reference alone does not authorize customization.
 
-[AGENTS.md](AGENTS.md) defines how contributors and agents apply these standards to existing and future skills. Skills that create or modify UI must link to their bundled Tailwind reference and read it before styling.
+See [the Tailwind standard](standards/tailwind.md) for the full portability contract.
 
-Each skill includes a generated copy under `references/standards/` so it remains self-contained when installed separately. Edit the canonical files in `standards/`, then synchronize and check the bundled copies:
+### SVGs and icons
+
+Store SVG assets in `public/icons/` and render them through the Starter-Kit's shared `src/shared/components/icon/index.astro` component. Inspect the actual component API before using it. When adapting HTML, extract inline SVGs into asset files and reuse the shared component.
+
+See [the SVG and icon standard](standards/icons.md) for rendering and accessibility requirements.
+
+### Upstream skills
+
+| Skill | Owns |
+| --- | --- |
+| `ui-clean-arch` | Application organization and dependency boundaries. |
+| `jails` | Component behavior, registration, state, and lifecycle contracts. |
+| `jails-stdlib` | Utility module and Store contracts. |
+
+The [upstream catalog](standards/upstream-skills.md) records reviewed revisions and the resolution procedure. Installation follows the upstream version available at install time; a reviewed skill revision does not pin JavaScript package versions. Check contracts against the application's installed packages.
+
+## VS Code and GitHub Copilot
+
+Install from your target workspace using the commands above and select GitHub Copilot. Workspace skills are discovered in `.github/skills/`; this repository distributes their source from `skills/`.
+
+Open the workspace where the skills were installed and enter `/jails-ai-setup` in Copilot Chat. If it is missing:
+
+1. Confirm installation completed in that workspace.
+2. Run **Developer: Reload Window**.
+3. Check the Skills section in Agent Customizations.
+4. Use a VS Code and Copilot version with Agent Skills support.
+
+See the [official VS Code documentation](https://code.visualstudio.com/docs/agent-customization/agent-skills) for discovery locations and invocation support.
+
+## Repository layout
+
+```text
+standards/                         # Canonical shared standards and upstream catalog
+scripts/sync_standards.py           # Bundles standards into each skill
+skills/
+├── jails-ai-setup/
+├── jails-ai-spec/
+├── jails-ai-mock/
+└── jails-ai-performance/
+```
+
+Each skill contains a `SKILL.md`, optional OpenAI client metadata in `agents/openai.yaml`, and self-contained references. Detailed references are loaded on demand. The `jails-ai-` folder name and skill `name` stay consistent and use kebab-case.
+
+The repository-level [AGENTS.md](AGENTS.md) governs authoring here. Installed skills receive shared rules through bundled references and do not rely on files outside their installation directory.
+
+## Contributing
+
+Write instructions, documentation, metadata, and examples in English. Keep shared rules in `standards/` and workflow-specific guidance in the corresponding skill. Skills that create or modify UI must link to their bundled standards and load them before implementation.
+
+After changing shared standards or adding skills, synchronize the bundled copies:
 
 ```bash
 python3 scripts/sync_standards.py
+```
+
+Then verify they are current:
+
+```bash
 python3 scripts/sync_standards.py --check
 ```
 
-The repository-level `AGENTS.md` guides authoring here; installed skills obtain the rules through their own references without depending on files outside their installation directory.
+Edit canonical standards rather than generated copies in `skills/*/references/standards/`. Keep upstream references and reviewed revisions consistent when updating their contracts.
 
-## Composing upstream skills
+---
 
-- `ui-clean-arch` defines application organization and boundaries.
-- `jails` defines interface behavior contracts.
-- `jails-stdlib` defines utility module and Store contracts.
-
-`jails-ai-setup` coordinates these responsibilities without copying their manuals. The [reference catalog](standards/upstream-skills.md) records paths, the reviewed revision, and the resolution procedure when skills are not installed. The Starter-Kit supplies the default build tools, language, and rendering configuration; changes require an explicit application requirement.
-
-Installation through `Javiani/agent-skills` follows the upstream source; the documented revision makes the content reviewed during jails-ai's creation traceable. The CLI does not resolve these dependencies merely because they are mentioned in the instructions.
+**Build for the first release. Leave a foundation for the changes that follow.**
+<img width="271" height="123" alt="jails-logo" src="https://github.com/user-attachments/assets/83f2cb5a-d430-4c4d-8125-10ee054a4cc8" />

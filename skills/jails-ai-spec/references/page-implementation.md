@@ -10,12 +10,19 @@ Before implementing, read the examples already present in the scaffold created f
 
 - `src/pages/index.astro` and `src/domain/home/index.astro`: route delegation and screen composition.
 - `src/domain/home/components/hello-world/index.astro` and `index.ts`: markup, namespace registration, controller, model, event handlers, and state-to-DOM behavior.
-- `src/shared/main.ts` and `src/shared/application.ts`: application registration, startup, and an existing `jails.stdlib/third-party` integration.
+- `src/shared/main.ts` and the layout: shared startup and genuinely shared components. Do not centralize domain-specific registrations there.
 - The component's `test.unit.ts` and `test.integration.ts`: existing testing conventions.
 
 These are navigation hints, not mandatory filenames for every project. Inspect their actual contents and neighboring implementations. If examples were moved or removed, locate equivalent project examples; consult the upstream starter when necessary and disclose that fallback. Do not pretend the starter demonstrates stdlib modules absent from its examples.
 
-Reuse the scaffold's composition, registration, event, and lifecycle patterns where compatible with current contracts. Do not copy unrelated demo content, arbitrary Tailwind values, or incidental patterns that conflict with jails-ai standards. Do not add a second application startup or register a component twice.
+Reuse the scaffold's composition, event, and lifecycle patterns where
+compatible with current contracts. Follow the shared
+[Jails rendering standard](standards/jails-rendering.md) for component-owned
+registration. Place the registration script immediately before the opening tag
+of the custom element in the owning `.astro` file. Do not copy unrelated demo content, centralized domain
+registration, arbitrary Tailwind values, or incidental patterns that conflict
+with jails-ai standards. Do not add a second application startup or register a
+component twice.
 
 ## Load architecture and implementation guidance
 

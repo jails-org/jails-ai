@@ -211,7 +211,7 @@ See [the SVG and icon standard](standards/icons.md) for rendering and accessibil
 | `jails` | Component behavior, registration, state, and lifecycle contracts. |
 | `jails-stdlib` | Utility module and Store contracts. |
 
-The [upstream catalog](standards/upstream-skills.md) records reviewed revisions and the resolution procedure. Installation follows the upstream version available at install time; a reviewed skill revision does not pin JavaScript package versions. Check contracts against the application's installed packages.
+The [upstream catalog](standards/upstream-skills.md) designates Javiani/agent-skills as the sole reference for Jails behavior and conventions. Resolve the current upstream default-branch commit for each task and check API contracts against the application's installed package versions.
 
 ## VS Code and GitHub Copilot
 
@@ -258,7 +258,7 @@ Then verify they are current:
 python3 scripts/sync_standards.py --check
 ```
 
-Edit canonical standards rather than generated copies in `skills/*/references/standards/`. Keep upstream references and reviewed revisions consistent when updating their contracts.
+Edit canonical standards rather than generated copies in `skills/*/references/standards/`. Keep upstream source links and the resolution procedure current.
 
 ---
 

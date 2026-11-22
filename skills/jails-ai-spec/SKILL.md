@@ -85,7 +85,7 @@ For screen work, follow [the page implementation workflow](references/page-imple
 
 Create missing components, actions, Services, or Entities according to the responsibility map. Reuse and modify existing implementations when appropriate; do not duplicate working behavior or create empty layers. Limit changes to the specified behavior and necessary integration, preserving unrelated application functionality.
 
-For Jails behavior, read the `jails` skill and relevant `jails-stdlib` references through the upstream catalog. Apply [the Jails initial rendering standard](references/standards/jails-rendering.md) when creating or modifying Jails UI. Inspect actual Starter-Kit-derived components, registration, state, and lifecycle examples in the application before coding. Verify installed API contracts instead of guessing from module names. Bridge Store subscriptions to component state and release resources on unmount where applicable.
+For Jails behavior, read the `jails` skill and relevant `jails-stdlib` references through the upstream catalog. Apply [the Jails component and rendering standard](references/standards/jails-rendering.md) when creating or modifying Jails UI. Inspect actual Starter-Kit-derived components, registration, state, and lifecycle examples in the application before coding. Verify installed API contracts instead of guessing from module names. Bridge Store subscriptions to component state and release resources on unmount where applicable.
 
 If UI is created or modified, read [the Tailwind standard](references/standards/tailwind.md) and [the SVG/icon standard](references/standards/icons.md). Preserve structural Component boundaries: route delegation, screen composition in the domain index, and section markup in its owning Component. Use built-in Tailwind classes and the base Icon component, extracting inline SVGs to the template's asset directory.
 
@@ -95,7 +95,7 @@ Keep TypeScript definitions in context-owned `types.ts` files as required by `ui
 
 For extraction-only work, review document organization, evidence, links, and requested coverage using the extraction workflow. Report documented domains, confirmed versus observed rules, unresolved questions, and uninspected areas; do not run implementation-only checks or claim runtime verification without evidence.
 
-For implementation work, apply the checks below.
+For implementation work, apply the checks below. Review each created or modified Jails controller against the upstream component conventions as required by the shared Jails standard.
 
 Verify observable outcomes against the specification's visual and behavioral acceptance criteria. For pages supplied as screenshots or layout images, complete the visual reproduction workflow and retain its comparison evidence. For pages, compare the implemented route with accessible design references at relevant viewport sizes and check keyboard use, focus, form feedback, state-to-DOM updates, and applicable UI states. Reconcile each mapped section with its actual structural Component and extract any section implementations left in the route or domain index before delivery. Add or update meaningful behavior tests using existing project conventions, including relevant failure, propagation, and persistence cases. Run applicable checks; use browser verification for changed UI when available. Check imports and actual abstraction boundaries against `ui-clean-arch`.
 

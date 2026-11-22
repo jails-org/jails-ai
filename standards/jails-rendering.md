@@ -1,4 +1,44 @@
-# Jails initial rendering
+# Jails component registration and initial rendering
+
+## Write and review Jails controllers
+
+Before creating or modifying a Jails controller, resolve the current `jails` skill from Javiani/agent-skills through [the upstream catalog](upstream-skills.md). Read its mental model, [component conventions](https://github.com/Javiani/agent-skills/blob/HEAD/skills/jails/references/component-conventions.md), and Component API at the same resolved revision. Apply the upstream conventions to the controller, including controllers adapted from existing examples.
+
+Before delivery, inspect each created or modified controller against the conventions you read. Check the default function declaration and named export order, placement of initialization values and closure-bound arrow helpers around `main`, and the ordering of event registration and helper calls inside `main`. Review the absence of declarations and branching inside `main`, external placement of pure utilities and data, and formatting of `model` and object updates passed to `state.set`. Use the upstream reference for the full set of conventions.
+
+Correct deviations in the affected code and report the upstream revision and component files reviewed. Verify mounting, interaction, state-to-DOM updates, and cleanup where applicable.
+
+## Keep behavior registration with its Astro component
+
+Each interactive Astro Component owns the Jails behavior for its section. Its
+own `.astro` entrypoint must import the colocated controller module and
+register the matching custom-element tag in an Astro `<script>` placed
+immediately before the custom element’s opening tag in that same file.
+
+```astro
+<script>
+	import * as WeatherSearch from './index'
+	import { register } from 'jails-js'
+
+	register('weather-search', WeatherSearch)
+</script>
+
+<weather-search>
+	<!-- Markup content -->
+</weather-search>
+```
+
+Keep the shared startup entrypoint domain-agnostic. It may expose `start()` and
+register genuinely shared components, but it must not import or register
+screen-specific controllers. For example, `src/shared/main.ts` should not
+contain a list of domain component modules. The layout remains responsible for
+calling `start()` after the screen has composed its Components.
+
+This boundary keeps domain imports with their owning Components and prevents
+shared code from depending on a screen. Verify that every interactive
+Component registers exactly once and that its registration script runs before
+Jails `start()`; an integration test that checks mounting and interaction is a
+useful confirmation.
 
 ## Prevent initially closed UI from flashing
 

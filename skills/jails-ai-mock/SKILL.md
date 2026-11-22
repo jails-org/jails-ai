@@ -74,6 +74,8 @@ Read mock responses through the appropriate Service boundary; do not embed fetch
 
 If UI changes are requested, apply [the Tailwind standard](references/standards/tailwind.md) and [the SVG/icon standard](references/standards/icons.md). Keep shared conventions and structural component boundaries intact.
 
+For Jails UI changes, apply [the shared Jails component and rendering standard](references/standards/jails-rendering.md), including the controller source review before delivery.
+
 ## Validate and show the developer
 
 Parse the saved file with a JSON parser. Check the result against the supplied contract and, when a formal schema and validator are available, validate it with those constraints. For proposed contracts, check consistent types, identifiers, relationships, units, and derived values. Do not claim formal schema validation when only JSON parsing or manual contract review was performed.

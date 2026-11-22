@@ -39,14 +39,14 @@ For a general review, implement the highest-confidence improvements within the r
 
 Apply [the shared architecture criteria](references/standards/ui-clean-architecture.md) when changing screen code. Resolve `ui-clean-arch` and relevant Jails skills through [the upstream catalog](references/standards/upstream-skills.md) when changing their abstractions or behavior. Preserve section ownership and existing application patterns; performance work does not authorize architectural replacement.
 
-Apply [the Jails initial rendering standard](references/standards/jails-rendering.md) when creating or modifying Jails UI, including when investigating flashes before initialization.
+Apply [the Jails component and rendering standard](references/standards/jails-rendering.md) when creating or modifying Jails UI, including when investigating flashes before initialization.
 
-Read [the Tailwind standard](references/standards/tailwind.md) before styling changes and [the SVG/icon standard](references/standards/icons.md) when working with SVGs. Use built-in utilities for layout reservations where suitable and preserve the base Icon rendering boundary.
+Read [the Tailwind standard](references/standards/tailwind.md) before styling changes and [the SVG/icon standard](references/standards/icons.md) before creating or modifying UI. Use built-in utilities for layout reservations where suitable and preserve the base Icon rendering boundary.
 
 The supplied font workflow explicitly permits justified font-loading configuration and fallback metric descriptors such as `size-adjust`, `ascent-override`, and `descent-override`. Keep these scoped to the font-loading fix; this does not authorize unrelated Tailwind theme extensions, custom utilities, or visual redesign. Document any portability requirements introduced by the chosen font configuration.
 
 ## Verify and deliver
 
-Make the smallest change supported by the investigation. Add or update meaningful regression checks for the changed behavior and configuration using existing tooling. Verify the affected loading or interaction journey, layout stability, readability, and any relevant font rendering; tests that only match configuration strings do not establish those outcomes. Run available checks, then repeat the relevant browser scenarios under comparable conditions.
+Review each created or modified Jails controller against the upstream component conventions as required by the shared Jails standard. Make the smallest change supported by the investigation. Add or update meaningful regression checks for the changed behavior and configuration using existing tooling. Verify the affected loading or interaction journey, layout stability, readability, and any relevant font rendering; tests that only match configuration strings do not establish those outcomes. Run available checks, then repeat the relevant browser scenarios under comparable conditions.
 
 Report the root cause and supporting evidence, files changed, chosen mitigation and trade-offs, verification results, and limitations. Distinguish measurements, visual observations, and hypotheses. Provide before/after values only when collected, identifying lab scope; do not claim field Core Web Vitals improved from a local run. Include explored routes, prioritized findings, remaining issues, and actual measurement conditions; report unmeasured metrics as unavailable, not zero. Do not claim CLS was eliminated or performance improved without measurement supporting that statement.

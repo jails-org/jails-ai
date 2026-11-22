@@ -6,7 +6,7 @@ Use this workflow when the developer asks to extract, reverse-engineer, or docum
 
 Identify the application and whether the request covers the whole project, selected domains/pages, or a particular flow. Use the stated scope; ask if ambiguous. For a whole-project extraction, inventory all routes and domains before investigating them in manageable batches. Record the revision inspected when identifiable.
 
-Read `specification/readme.md` and the relevant domain readmes/topic files first. If the legacy `specification.md` exists, migrate it using the organization guide without losing rules or evidence. Inventory routes, layouts, structural components, controllers, Stores/actions, Services, Entities, tests, fixtures, and supplied product documents. Use the upstream `ui-clean-arch` guidance to interpret responsibility boundaries, but describe the actual implementation even if it does not follow that architecture. Do not manufacture missing abstractions or silently refactor the application.
+Read `specification/readme.md` and the relevant domain readmes/topic files first. If the legacy `specification.md` exists, migrate it using the organization guide without losing rules or evidence. Inventory routes, layouts, structural components, controllers, Stores/actions, Services, Entities, tests, fixtures, and supplied product documents. Resolve `ui-clean-arch` through [the upstream catalog](standards/upstream-skills.md) and use its guidance to interpret responsibility boundaries, but describe the actual implementation even if it does not follow that architecture. Do not manufacture missing abstractions or silently refactor the application.
 
 Trace each scoped page through its significant user journeys:
 

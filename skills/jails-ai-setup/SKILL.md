@@ -13,7 +13,7 @@ Prepare an executable foundation with UI Clean Architecture, Jails for interface
 
 Before creating or modifying interface styles, read and apply [the shared Tailwind standard](references/standards/tailwind.md). Include the shared Tailwind and SVG/icon conventions in the generated application's architecture or styling documentation.
 
-When creating or modifying Jails UI, read and apply [the Jails initial rendering standard](references/standards/jails-rendering.md).
+When creating or modifying Jails UI, read and apply [the Jails component and rendering standard](references/standards/jails-rendering.md).
 
 ## Shared SVG and icon convention
 
@@ -40,6 +40,7 @@ Use [jails-org/Starter-Kit](https://github.com/jails-org/Starter-Kit) as the app
 3. Create the chosen destination if needed, then copy the starter contents, including dotfiles, while excluding the clone's `.git` directory. Do not import upstream Git history or modify an existing destination repository's `.git`. Do not initialize a new Git repository unless requested.
 4. Use the starter's package manager and lockfile. The reviewed starter provides `yarn.lock`; prefer Yarn unless the fetched starter or the user specifies otherwise. Install dependencies in the destination without upgrading them as part of setup.
 5. Keep the starter's initial screen as the default scaffold. Apply product-specific changes only when requested. Record the source URL, fetched commit, development commands, and applicable skill references in the application's README.
+6. Normalize Jails registration without changing the initial screen: if the starter imports or registers domain components in `src/shared/main.ts`, move each controller import and `register()` call to a `<script>` immediately before the custom element's opening tag in that Component's own `.astro` file. Keep shared startup domain-agnostic and ensure registrations run before `start()`, following the shared Jails rendering standard.
 
 The source was reviewed at commit `a9708be56ee8c228d0fe205bfb2cb3dad7753292`. This identifies the inspected baseline, not a mandatory pin: use the fetched revision unless the user requests a particular one.
 
@@ -57,6 +58,13 @@ Do not turn optional Jails patterns into additional architectural rules. Use `ui
 
 ## Apply the architecture and framework contracts
 
+Each interactive Astro Component must import its colocated Jails controller
+and register its own custom-element tag from a `<script>` in that Component's
+`.astro` entrypoint, immediately before the custom element's opening tag. Keep `src/shared/main.ts` domain-agnostic: use it for
+shared startup and genuinely shared registrations, never as a list of
+screen-specific Components. Follow the [shared Jails rendering standard](references/standards/jails-rendering.md) and
+ensure all registrations run before `start()`.
+
 Review the scaffold with the upstream skills and [the shared UI Clean Architecture acceptance criteria](references/standards/ui-clean-architecture.md) before making any requested adaptations. Create only the abstractions required by the initial screen. Keep component-local state local; use the screen Store for propagation or persistence as specified by `ui-clean-arch`.
 
 Register complete Jails component modules before `start()`. In SSR/SSG, initialize browser APIs only during the client phase. Connect subscriptions to state and release resources on unmount according to the upstream skills. Check the installed exports and versions before applying examples; a skill revision does not pin a JavaScript package version.
@@ -65,6 +73,6 @@ Do not reinstall packages already provided by the starter, add unused libraries,
 
 ## Verify and deliver
 
-Run the build and relevant available checks from the destination. The reviewed starter provides `build`, `test:unit`, and `test:integration` scripts; use the fetched manifest as the source of truth. Run the available unit tests and the integration tests when the browser dependencies are available. When browser access is available, verify the initial screen: mounting, interaction, DOM updates, and cleanup where applicable. Review dependency boundaries according to `ui-clean-arch`. Verify styling against the shared Tailwind standard.
+Review each created or modified Jails controller against the upstream component conventions as required by the shared Jails standard. Run the build and relevant available checks from the destination. The reviewed starter provides `build`, `test:unit`, and `test:integration` scripts; use the fetched manifest as the source of truth. Run the available unit tests and the integration tests when the browser dependencies are available. When browser access is available, verify the initial screen: mounting, interaction, DOM updates, and cleanup where applicable. Review dependency boundaries according to `ui-clean-arch`. Verify styling against the shared Tailwind standard.
 
 Report the resolved destination, starter URL and fetched commit, generated files, applied choices, references actually used, checks performed, and the command to start the application. State which checks could not be performed and why.

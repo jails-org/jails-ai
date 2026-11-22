@@ -39,6 +39,8 @@ Identify the target application's root from the request, workspace, manifest, an
 
 Inspect package scripts, installed versions, routes, layouts, aliases, and styles. An existing application can have no screens yet. Use its manifest, configuration, and source to distinguish it from a directory without an application.
 
+At the application root, use [the project extension discovery workflow](references/standards/project-extensions.md) before interpreting screen or behavior requirements, extracting documentation, or choosing components and styles. If setup is needed, do this once the application root is established.
+
 ### Set up a new application when needed
 
 When an implementation request would create the first screen or feature and no target application exists, load `jails-ai-setup` and use its destination workflow. Ask whether the developer wants to start the project in the current directory or at another location, including a new subfolder. Collect the path or folder name as needed. If the developer already explicitly chose a destination for the new project, use that choice. Wait for the destination before writing files.

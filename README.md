@@ -21,7 +21,7 @@ Jails.ai draws on more than 20 years of development experience across projects. 
 
 This repository is a collection of **Agent Skills**: instructions and on-demand references that guide a coding agent through specific development workflows. It follows the [Agent Skills specification](https://agentskills.io/specification) and works with the [skills CLI](https://github.com/vercel-labs/skills).
 
-The skills coordinate application setup, specifications and implementation, mock responses, and performance investigations. They compose the upstream `ui-clean-arch`, `jails`, and `jails-stdlib` skills rather than duplicating their technical manuals.
+The skills coordinate application setup, specifications and implementation, mock responses, performance investigations, and project extensions. They compose the upstream `ui-clean-arch`, `jails`, and `jails-stdlib` skills.
 
 The application foundation comes from [jails-org/Starter-Kit](https://github.com/jails-org/Starter-Kit): Astro, TypeScript, Jails, jails.stdlib, Tailwind, Vitest, and Playwright. This distribution repository itself does not contain a generated application or a `jails-ai` terminal executable.
 
@@ -40,7 +40,7 @@ git clone https://github.com/jails-org/jails-ai.git
 From the project or workspace where you want the skills available, run:
 
 ```bash
-npx skills add /absolute/path/to/jails-ai --skill jails-ai-setup jails-ai-spec jails-ai-mock jails-ai-performance
+npx skills add /absolute/path/to/jails-ai --skill jails-ai-setup jails-ai-spec jails-ai-mock jails-ai-performance jails-ai-extension
 ```
 
 Replace `/absolute/path/to/jails-ai` with the absolute path to your clone and select your coding agent. The agent fetches the required guidance from Javiani/agent-skills on demand. Installing those upstream skills separately is unnecessary. See the [upstream catalog](standards/upstream-skills.md#load-upstream-guidance-on-demand) for the fetch procedure.
@@ -79,6 +79,7 @@ The setup skill fetches the Starter-Kit, installs its dependencies, and verifies
 | [jails-ai-spec](skills/jails-ai-spec/SKILL.md) | Specify and build screens or behaviors, or document an existing application. | A cumulative `specification/` directory and implementation when requested. |
 | [jails-ai-mock](skills/jails-ai-mock/SKILL.md) | Model dynamic screen data and create response fixtures. | Valid JSON under `public/mocks/<domain>/`. |
 | [jails-ai-performance](skills/jails-ai-performance/SKILL.md) | Investigate and improve loading, responsiveness, and visual stability. | Evidence-based findings and verified, focused fixes. |
+| [jails-ai-extension](skills/jails-ai-extension/SKILL.md) | Save reusable project guidance for the other Jails.ai skills. | An application-local index and topic files under `.jails-ai/extensions/`. |
 
 The following examples use Copilot's `/` syntax. Use `$` instead in clients that support dollar mentions.
 
@@ -150,6 +151,14 @@ Scrolling and animation smoothness are investigated separately from Core Web Vit
 
 For font-related layout shifts, the skill preserves the intended design and does not automatically choose `font-display: optional`.
 
+### Record project conventions
+
+```text
+/jails-ai-extension Document our existing design system so future screens reuse its components and tokens. Use docs/design-system.md and the shared components as sources.
+```
+
+The skill saves the guidance in the application, for example in `.jails-ai/extensions/design-system.md`, and registers it in `.jails-ai/extensions/readme.md`. Setup, specification, mock, and performance workflows check that index and load entries relevant to their work. Install the updated versions of those skills to use this behavior in an existing workspace. See the [project extensions standard](standards/project-extensions.md).
+
 ## Architecture that supports review
 
 A clear architecture gives both the agent and the reviewer a shared map of the application.
@@ -209,7 +218,8 @@ skills/
 ├── jails-ai-setup/
 ├── jails-ai-spec/
 ├── jails-ai-mock/
-└── jails-ai-performance/
+├── jails-ai-performance/
+└── jails-ai-extension/
 ```
 
 Each skill contains a `SKILL.md`, optional OpenAI client metadata in `agents/openai.yaml`, and self-contained references. Detailed references are loaded on demand. The `jails-ai-` folder name and skill `name` stay consistent and use kebab-case.

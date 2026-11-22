@@ -21,6 +21,8 @@ If the developer does not know, says the application feels slow, or asks for a g
 
 Locate the target application and affected routes from context. Read local instructions, package scripts, build configuration, relevant source, and existing performance tooling. Inspect `specification/readme.md` and the relevant domain/topic documents when present to preserve required behavior.
 
+Use [the project extension discovery workflow](references/standards/project-extensions.md) before choosing the baseline or proposing changes. Apply relevant performance budgets, measurement conventions, and UI constraints from the project.
+
 Read [the Core Web Vitals investigation method](references/core-web-vitals.md) before making code changes. Use its field-evidence, reproducible browser journey, source-attribution, and prioritization process. Load [the detailed CLS and font workflow](references/layout-shift.md) when visual instability or font loading is relevant, rather than assuming fonts are always the cause.
 
 For a general exploration, inspect the entry route and a small representative set of routes selected from actual project structure: a content-heavy page and an interaction-heavy page when they exist. Exercise the key interactions rather than running a load-only audit. Expand coverage when findings indicate a shared cause or another important journey; report the scope actually explored.

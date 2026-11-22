@@ -23,6 +23,8 @@ Use a question mechanism that supports the requested input. If a tool accepts on
 
 Locate the target application root from the request and project context. Inspect local instructions, the relevant screen, its Services and Entities, existing mocks, and `specification/readme.md` and relevant domain/topic documents when present. Ask for the project or screen only when ambiguous. Write fixtures in the application, not in the installed skill directory or the jails-ai distribution repository.
 
+Use [the project extension discovery workflow](references/standards/project-extensions.md) before proposing a response contract or generating fixtures. Apply relevant fixture, data, and Service conventions alongside the supplied contract.
+
 Use `public/mocks/<domain>/`, following the Starter-Kit's public asset directory; treat `publick/mocks/` as a spelling error unless the developer explicitly requires that literal directory. Create missing directories as needed. If the application configures a different public root, identify it and clarify the destination before writing an unserved fixture.
 
 Resolve `<domain>` from the screen's owning domain in the application, such as `src/domain/home` → `public/mocks/home/`. Reuse the actual domain directory name, not the page title, component name, or a guessed business grouping. If ownership cannot be determined from the request and source, ask which screen domain owns the data before writing files. If the domain is being created, use its agreed name consistently in the source and mock directory.
@@ -72,7 +74,7 @@ Read `ui-clean-arch` and its specification through [the upstream catalog](refere
 
 Read mock responses through the appropriate Service boundary; do not embed fetch or storage access in Components or Stores. Use Entities for necessary semantic adaptation, and the screen Store for cross-component propagation or persistence. A static fixture does not implement filtering, mutations, pagination, latency, or error handling merely by containing fields describing them.
 
-If UI changes are requested, apply [the Tailwind standard](references/standards/tailwind.md) and [the SVG/icon standard](references/standards/icons.md). Keep shared conventions and structural component boundaries intact.
+If UI changes are requested, read and apply [the Tailwind standard](references/standards/tailwind.md) before styling and [the SVG/icon standard](references/standards/icons.md) before changing UI. Keep shared conventions and structural component boundaries intact.
 
 For Jails UI changes, apply [the shared Jails component and rendering standard](references/standards/jails-rendering.md). Apply the upstream catalog’s review to all Jails code changes.
 

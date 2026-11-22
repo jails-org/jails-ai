@@ -31,6 +31,8 @@ Resolve the destination against the original working directory:
 
 Inspect local instructions and the destination before writing. Preserve existing files and repository metadata. If the destination contains files, compare them with the starter and ask how to handle conflicting files before copying; never overwrite or delete user work silently. This repository distributes skills: create an application here only if the user explicitly chooses it as the destination.
 
+Check the chosen destination for [project extensions](references/standards/project-extensions.md) before scaffolding. Use relevant guidance for requested adaptations and preserve the project's extension files when copying the starter.
+
 ## Scaffold from Starter-Kit
 
 Use [jails-org/Starter-Kit](https://github.com/jails-org/Starter-Kit) as the application source. Do not substitute a generic framework generator or recreate the template manually.

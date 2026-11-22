@@ -37,7 +37,15 @@ Treat 95% as a verification target, never a promise inferred from appearance. Re
 
 Identify the target application's root from the request, workspace, manifest, and local instructions. In a monorepo, use the application root, not automatically the repository root. Ask for the target if ambiguous. Read the overview and domain/page index in `specification/readme.md`, then retrieve relevant domain readmes, topic files, linked shared rules, source, tests, and documentation before changing anything. Follow [the specification organization guide](references/specification-organization.md) for focused retrieval and updates. The destination is the application being specified, not the installed skill directory or the jails-ai distribution repository.
 
-Inspect package scripts, installed versions, routes, layouts, aliases, and styles. If no target application exists, direct the developer to `jails-ai-setup`; do not silently scaffold or replace a project. For page creation or UI changes, read [the page implementation workflow](references/page-implementation.md) before coding, including its required Starter-Kit example inspection.
+Inspect package scripts, installed versions, routes, layouts, aliases, and styles. An existing application can have no screens yet. Use its manifest, configuration, and source to distinguish it from a directory without an application.
+
+### Set up a new application when needed
+
+When an implementation request would create the first screen or feature and no target application exists, load `jails-ai-setup` and use its destination workflow. Ask whether the developer wants to start the project in the current directory or at another location, including a new subfolder. Collect the path or folder name as needed. If the developer already explicitly chose a destination for the new project, use that choice. Wait for the destination before writing files.
+
+Once the destination is chosen, run `jails-ai-setup` in the same task using that answer. If there is no dedicated skill invocation mechanism, read its `SKILL.md` and carry out its workflow directly. Follow its safeguards for existing files. After setup succeeds, use the scaffolded application root for the specification and continue implementing the original request. If setup is declined or blocked, report that outcome and continue any independent requirements work. Extraction-only requests require an existing application.
+
+For page creation or UI changes, read [the page implementation workflow](references/page-implementation.md) before coding, including its required Starter-Kit example inspection.
 
 Extract the trigger, actor, preconditions, inputs, expected outcomes, affected screens or sections, state propagation, persistence requirements, integrations, and applicable failure cases. Follow supplied documents and existing contracts; do not invent business decisions. Inspect the current implementation to distinguish missing behavior from behavior that already meets the rule.
 

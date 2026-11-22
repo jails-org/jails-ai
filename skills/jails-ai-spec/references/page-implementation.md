@@ -4,7 +4,7 @@ Use this workflow within `jails-ai-spec` whenever creating or modifying a screen
 
 ## Inspect the application and starter examples
 
-Locate the target application from the working directory and context. Ask for its path only if ambiguous. Read local instructions, package scripts, installed versions, routes, layouts, components, aliases, and styles. If no application exists, direct the user to `jails-ai-setup`; do not silently scaffold or replace a project.
+Follow [the application discovery and setup workflow](../SKILL.md#locate-the-application-and-understand-the-scope) to establish the application root. Read local instructions, package scripts, installed versions, routes, layouts, components, aliases, and styles from that application.
 
 Before implementing, read the examples already present in the scaffold created from [jails-org/Starter-Kit](https://github.com/jails-org/Starter-Kit). In the reviewed starter, useful examples include:
 

@@ -41,10 +41,9 @@ From the project or workspace where you want the skills available, run:
 
 ```bash
 npx skills add /absolute/path/to/jails-ai --skill jails-ai-setup jails-ai-spec jails-ai-mock jails-ai-performance
-npx skills add Javiani/agent-skills --skill ui-clean-arch jails jails-stdlib
 ```
 
-Replace `/absolute/path/to/jails-ai` with the absolute path to your clone. Select your coding agent in the installer. The second command installs the upstream skills; the CLI does not install them merely because this repository references them.
+Replace `/absolute/path/to/jails-ai` with the absolute path to your clone and select your coding agent. The agent fetches the required guidance from Javiani/agent-skills on demand. Installing those upstream skills separately is unnecessary. See the [upstream catalog](standards/upstream-skills.md#load-upstream-guidance-on-demand) for the fetch procedure.
 
 To inspect the local catalog before installation:
 
@@ -215,7 +214,7 @@ skills/
 
 Each skill contains a `SKILL.md`, optional OpenAI client metadata in `agents/openai.yaml`, and self-contained references. Detailed references are loaded on demand. The `jails-ai-` folder name and skill `name` stay consistent and use kebab-case.
 
-The repository-level [AGENTS.md](AGENTS.md) governs authoring here. Installed skills receive shared rules through bundled references and do not rely on files outside their installation directory.
+The repository-level [AGENTS.md](AGENTS.md) governs authoring here. Installed skills receive shared rules and the on-demand upstream fetch procedure through bundled references.
 
 ## Contributing
 

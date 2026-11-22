@@ -6,6 +6,8 @@ For every code change, including additions, edits, and removals, resolve the [Ja
 
 Application specifications live in a root `specification/` directory. `specification/readme.md` contains general/shared information and a domain/page index; `specification/<domain>/` contains only that domain's rules, with a local `readme.md` and optional topic files. Skills reading specifications must retrieve the root index and relevant domain documents rather than assume a single `specification.md` file. The jails-ai-spec organization guide defines migration of legacy files.
 
+When creating or editing a Jails component, apply the [`jails-stdlib` reuse check](standards/upstream-skills.md#check-for-jails-stdlib-reuse) before implementation and again before delivery.
+
 All skills that create or modify UI must read `standards/icons.md` and link to its bundled copy at `references/standards/icons.md`. Render SVGs through the base repository's shared Icon component, and extract inline SVGs from existing HTML into the base template's SVG asset directory.
 
 Shared architecture and implementation standards belong in `standards/`, independently of any individual skill. Read and apply `standards/tailwind.md` when creating or modifying interface styles.

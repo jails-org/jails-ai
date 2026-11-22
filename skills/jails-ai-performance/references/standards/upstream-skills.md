@@ -10,23 +10,34 @@ Use [Javiani/agent-skills](https://github.com/Javiani/agent-skills) as the sole 
 | `jails` | [skills/jails/SKILL.md](https://github.com/Javiani/agent-skills/blob/HEAD/skills/jails/SKILL.md) | The linked mental model and component conventions. |
 | `jails-stdlib` | [skills/jails-stdlib/SKILL.md](https://github.com/Javiani/agent-skills/blob/HEAD/skills/jails-stdlib/SKILL.md) | The linked references for the modules used. |
 
-## Resolve the current guidance for each task
+## Load upstream guidance on demand
 
-1. Resolve the current default-branch commit of the upstream repository at the start of the task. Use a fresh shallow clone in a temporary directory, or resolve remote HEAD through Git or the repository host and read the files at that commit. Use one commit for the skill entrypoints and their relative references throughout the task. Honor an explicit revision requested by the developer.
-2. Read the required `SKILL.md` files by their exact names and read their task-relevant references within the same repository. Reuse installed copies when their contents match the resolved upstream files. Record the upstream commit and references actually read in the handoff.
-3. If upstream freshness cannot be verified, disclose that limitation. Use accessible installed copies as a fallback and identify their revision when possible. If required guidance is unavailable, report which files or references need access before implementing the affected work.
-4. Check the application's manifest, lockfile, and installed package exports and types for compatibility before applying upstream examples. If the guidance describes an API unavailable in the installed version, report the mismatch. Preserve the application's dependency versions unless an upgrade is requested.
+When a workflow requires upstream guidance, fetch it as part of the task. A workspace with only the Jails.ai skills installed is sufficient. Read upstream skill files directly as task references and keep any checkout in a temporary directory outside the destination project.
+
+For a shell with Git and access to GitHub, use:
+
+```bash
+jails_upstream_dir="$(mktemp -d)" &&
+  git clone --quiet --depth 1 https://github.com/Javiani/agent-skills.git "$jails_upstream_dir" &&
+  git -C "$jails_upstream_dir" rev-parse HEAD
+```
+
+With repository-host access, resolve the default-branch commit and read the files directly at that commit. Use this route if Git or a temporary checkout is unavailable. Honor an explicit revision requested by the developer.
+
+Read the required `skills/<name>/SKILL.md` entrypoints and their task-relevant references from the same revision. Reuse the resolved revision throughout the task and record it with the references read in the handoff.
+
+If neither fetch route succeeds, use an accessible local copy as a fallback, disclose that freshness could not be verified, and identify its revision when possible. If required guidance is unavailable, report the specific access blocker and continue any independent work. A separate skill installation is unnecessary.
+
+Check the application's manifest, lockfile, and installed package exports and types for compatibility before applying upstream examples. If the guidance describes an API unavailable in the installed version, report the mismatch. Preserve the application's dependency versions unless an upgrade is requested.
+
+## Check for jails-stdlib reuse
+
+Before creating or editing a Jails component, resolve and read `jails-stdlib` even if the component has no existing stdlib imports. Check its module table for the behavior being added or changed, including custom helpers and direct browser API usage in the affected code.
+
+Read the reference for each candidate and confirm the installed public API covers the required behavior, runtime, and lifecycle. Reuse a compatible module when it reduces custom code and preserves required behavior. Keep a focused implementation when the available modules do not meet the requirement.
 
 ## Review Jails changes before delivery
 
 Review additions, edits, and removals against the resolved `jails` conventions and the relevant module contracts. Inspect the actual diff and the resulting affected code. For removals, check remaining callers, registrations, and bindings where applicable. Correct introduced deviations and verify affected mounting, interactions, state updates, and cleanup as applicable.
 
-## Optional installation
-
-To install the current upstream skills into the destination project, run from that project:
-
-```bash
-npx skills add Javiani/agent-skills --skill ui-clean-arch jails jails-stdlib
-```
-
-Select the target agent and preserve the installer lockfile when applicable. Resolve freshness again when using an installed skill on a later task. This catalog provides source links and a resolution procedure. Skill installation is a separate operation, and `dependencies.tools` in `agents/openai.yaml` is reserved for MCP tools.
+For new or edited components, recheck the diff for custom behavior that a suitable stdlib module can replace. Report any replacements and explain why a plausible candidate was unsuitable if custom code was retained.

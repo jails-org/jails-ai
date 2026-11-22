@@ -6,6 +6,8 @@ Before creating or modifying a Jails controller, resolve the current `jails` ski
 
 Before delivery, inspect each created or modified controller against the conventions you read. Check the default function declaration and named export order, placement of initialization values and closure-bound arrow helpers around `main`, and the ordering of event registration and helper calls inside `main`. Review the absence of declarations and branching inside `main`, external placement of pure utilities and data, and formatting of `model` and object updates passed to `state.set`. Use the upstream reference for the full set of conventions.
 
+Follow the [controller structure standard](controller-structure.md) for consistent ordering: closure variables, async functions, `main()`, `unmount()`, helper functions, and finally `model`/`view` exports.
+
 Correct deviations in the affected code and report the upstream revision and component files reviewed. Verify mounting, interaction, state-to-DOM updates, and cleanup where applicable.
 
 ## Keep behavior registration with its Astro component

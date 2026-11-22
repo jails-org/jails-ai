@@ -58,8 +58,9 @@ Do not turn optional Jails patterns into additional architectural rules. Use `ui
 
 ## Apply the architecture and framework contracts
 
-Each interactive Astro Component must import its colocated Jails controller
-and register its own custom-element tag from a `<script>` in that Component's
+Each interactive Astro Component must import `register` from `shared/main`
+and its colocated Jails controller as a namespace. Register its own
+custom-element tag from a `<script>` in that Component's
 `.astro` entrypoint, immediately before the custom element's opening tag. Keep `src/shared/main.ts` domain-agnostic: use it for
 shared startup and genuinely shared registrations, never as a list of
 screen-specific Components. Follow the [shared Jails rendering standard](references/standards/jails-rendering.md) and

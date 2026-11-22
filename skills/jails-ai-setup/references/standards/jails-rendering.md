@@ -7,14 +7,16 @@ Resolve the `jails` skill through [the upstream catalog](upstream-skills.md). Us
 ## Keep behavior registration with its Astro component
 
 Each interactive Astro Component owns the Jails behavior for its section. Its
-own `.astro` entrypoint must import the colocated controller module and
-register the matching custom-element tag in an Astro `<script>` placed
-immediately before the custom element’s opening tag in that same file.
+own `.astro` entrypoint must import `register` from `shared/main` and the
+colocated controller as a namespace. Register the matching custom-element tag
+in an Astro `<script>` immediately before the custom element’s opening tag.
+Follow the Starter-Kit pattern: `src/shared/main.ts` re-exports `register`
+from `jails-js`.
 
 ```astro
 <script>
+	import { register } from 'shared/main'
 	import * as WeatherSearch from './index'
-	import { register } from 'jails-js'
 
 	register('weather-search', WeatherSearch)
 </script>

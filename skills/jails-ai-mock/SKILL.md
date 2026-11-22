@@ -74,7 +74,7 @@ Read mock responses through the appropriate Service boundary; do not embed fetch
 
 If UI changes are requested, apply [the Tailwind standard](references/standards/tailwind.md) and [the SVG/icon standard](references/standards/icons.md). Keep shared conventions and structural component boundaries intact.
 
-For Jails UI changes, apply [the shared Jails component and rendering standard](references/standards/jails-rendering.md), including the controller source review before delivery.
+For Jails UI changes, apply [the shared Jails component and rendering standard](references/standards/jails-rendering.md). Apply the upstream catalog’s review to all Jails code changes.
 
 ## Validate and show the developer
 

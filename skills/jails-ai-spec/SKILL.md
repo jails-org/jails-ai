@@ -47,14 +47,7 @@ For extraction-only work, use `ui-clean-arch` to interpret responsibilities whil
 
 Read [the upstream skill catalog](references/standards/upstream-skills.md), then resolve and read `ui-clean-arch` and its architecture specification before choosing abstractions or implementing. Apply [the shared architecture acceptance criteria](references/standards/ui-clean-architecture.md). These references are required, not optional suggestions.
 
-Map each responsibility to its owner using the actual architecture:
-
-- **Component:** presentation and behavior confined to a meaningful screen section, with no persistence or propagation to other sections.
-- **Store and actions:** screen-level coordination when effects propagate across Components or state must persist. Reuse the screen's single Store rather than adding a Store for each new rule. Follow current-state input, next-state return, and complete-state notification contracts.
-- **Services:** external integrations, including backend calls and browser storage. Use stateless functions accepting one object and returning a Promise of an object or list of objects. Keep direct integration access out of Components and Stores.
-- **Entities:** pure, synchronous, stateless transformation and formatting of input data for semantic UI consumption. Do not use an Entity as a catch-all for any business rule or introduce side effects there.
-
-Determine whether resources are screen-exclusive or actually reused across domains. Keep exclusive resources in their domain; shared resources must not import domains. Preserve layer dependency directions and framework independence of the inner layers. A behavior can require multiple abstractions; its business-rule label alone does not determine its owner.
+Use the upstream architecture contracts to assign each behavior to its owner and decide whether its resources are screen-exclusive or shared. A business-rule label alone does not determine the owner.
 
 If the abstraction or breadth of the behavior remains unclear after inspecting the context and `ui-clean-arch`, ask focused questions before implementing the dependent code. Useful questions include:
 
@@ -95,7 +88,7 @@ Keep TypeScript definitions in context-owned `types.ts` files as required by `ui
 
 For extraction-only work, review document organization, evidence, links, and requested coverage using the extraction workflow. Report documented domains, confirmed versus observed rules, unresolved questions, and uninspected areas; do not run implementation-only checks or claim runtime verification without evidence.
 
-For implementation work, apply the checks below. Review each created or modified Jails controller against the upstream component conventions as required by the shared Jails standard.
+For implementation work, apply the checks below. Apply the upstream catalog’s review to all Jails code changes.
 
 Verify observable outcomes against the specification's visual and behavioral acceptance criteria. For pages supplied as screenshots or layout images, complete the visual reproduction workflow and retain its comparison evidence. For pages, compare the implemented route with accessible design references at relevant viewport sizes and check keyboard use, focus, form feedback, state-to-DOM updates, and applicable UI states. Reconcile each mapped section with its actual structural Component and extract any section implementations left in the route or domain index before delivery. Add or update meaningful behavior tests using existing project conventions, including relevant failure, propagation, and persistence cases. Run applicable checks; use browser verification for changed UI when available. Check imports and actual abstraction boundaries against `ui-clean-arch`.
 

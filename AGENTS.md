@@ -2,6 +2,8 @@
 
 Write all project content in English.
 
+For every code change, including additions, edits, and removals, resolve the [Jails skill from Javiani/agent-skills](standards/upstream-skills.md) at the start of the task. Read its mental model, component conventions, and any other references relevant to the change. Before delivery, review the full task diff and the resulting affected code against the applicable Jails conventions. For removals, check the remaining callers, registrations, and bindings where applicable. Fix any violations introduced by the change and report any verification limits.
+
 Application specifications live in a root `specification/` directory. `specification/readme.md` contains general/shared information and a domain/page index; `specification/<domain>/` contains only that domain's rules, with a local `readme.md` and optional topic files. Skills reading specifications must retrieve the root index and relevant domain documents rather than assume a single `specification.md` file. The jails-ai-spec organization guide defines migration of legacy files.
 
 All skills that create or modify UI must read `standards/icons.md` and link to its bundled copy at `references/standards/icons.md`. Render SVGs through the base repository's shared Icon component, and extract inline SVGs from existing HTML into the base template's SVG asset directory.

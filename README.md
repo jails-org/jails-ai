@@ -162,32 +162,7 @@ A clear architecture gives both the agent and the reviewer a shared map of the a
 | **Tailwind** | UI composition with reusable utility classes. |
 | **Jails.ai skills** | Workflow, architectural conventions, and verification across those pieces. |
 
-The [UI Clean Architecture standard](standards/ui-clean-architecture.md) defines how those responsibilities translate into source boundaries:
-
-- **Routes** delegate to domain screens.
-- **Domain screens** compose meaningful structural Components.
-- **Components** own their section's markup and local behavior.
-- **Stores** coordinate screen state when propagation or persistence is needed.
-- **Services** own external integrations, including network and storage access.
-- **Entities** adapt received data through pure, synchronous functions.
-
-Screen-exclusive resources stay within their domain. Shared resources support reuse across domains. Domains do not import other domains, and shared code does not depend on a domain.
-
-A screen with summary, filters, and results might map to:
-
-```text
-src/pages/orders.astro
-src/domain/orders/index.astro
-src/domain/orders/components/summary/index.astro
-src/domain/orders/components/filters/index.astro
-src/domain/orders/components/results/index.astro
-```
-
-The screen determines the sections; this is an example, not a required component count. Create abstractions for actual responsibilities, not empty folders to satisfy a diagram.
-
-Before delivery, the agent maps sections to files, inspects imports and ownership, and traces state, integrations, and data adaptation. A passing build or a finished layout does not replace this source-level review.
-
-These boundaries help reviewers locate a change and assess its impact. They still need to validate behavior, tests, and technical decisions. AI-assisted speed is useful when the resulting application remains understandable to the people responsible for it.
+Use the [upstream skill catalog](standards/upstream-skills.md) to resolve the architecture specification and Jails conventions. The [screen implementation review](standards/ui-clean-architecture.md) records how Jails.ai skills verify the implemented boundaries before delivery.
 
 ## Shared implementation conventions
 

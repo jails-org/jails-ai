@@ -1,14 +1,6 @@
-# Jails component registration and initial rendering
+# Jails registration and initial rendering in the Starter-Kit
 
-## Write and review Jails controllers
-
-Before creating or modifying a Jails controller, resolve the current `jails` skill from Javiani/agent-skills through [the upstream catalog](upstream-skills.md). Read its mental model, [component conventions](https://github.com/Javiani/agent-skills/blob/HEAD/skills/jails/references/component-conventions.md), and Component API at the same resolved revision. Apply the upstream conventions to the controller, including controllers adapted from existing examples.
-
-Before delivery, inspect each created or modified controller against the conventions you read. Check the default function declaration and named export order, placement of initialization values and closure-bound arrow helpers around `main`, and the ordering of event registration and helper calls inside `main`. Review the absence of declarations and branching inside `main`, external placement of pure utilities and data, and formatting of `model` and object updates passed to `state.set`. Use the upstream reference for the full set of conventions.
-
-Follow the [controller structure standard](controller-structure.md) for consistent ordering: closure variables, async functions, `main()`, `unmount()`, helper functions, and finally `model`/`view` exports.
-
-Correct deviations in the affected code and report the upstream revision and component files reviewed. Verify mounting, interaction, state-to-DOM updates, and cleanup where applicable.
+Resolve the `jails` skill through [the upstream catalog](upstream-skills.md). Use its component conventions, Component API, and rendering references when implementing and reviewing Jails code.
 
 ## Keep behavior registration with its Astro component
 
@@ -46,7 +38,7 @@ useful confirmation.
 
 In server-rendered or static HTML, Jails directives such as `html-if` and `html-class` are not applied by the browser before Jails initializes. A modal, backdrop, or empty styled notice can therefore appear briefly even when its initial Jails state is closed or empty.
 
-Keep the registered component host in the document so Jails can initialize it, but put initially hidden visual content inside a native `<template>` within that host. Jails processes the template when rendering the component; the browser does not display its contents before initialization. Apply conditional visibility to the rendered content, not to an initially visible overlay on the host.
+Apply the upstream rendering guidance for native `<template>` content. Keep the registered host in the initial HTML and put the initially hidden visual content inside its template. Apply conditional visibility to the rendered content.
 
 For example, with a registered `app-modal` whose model starts with `open: false`:
 

@@ -17,6 +17,10 @@ Use [Javiani/agent-skills](https://github.com/Javiani/agent-skills) as the sole 
 3. If upstream freshness cannot be verified, disclose that limitation. Use accessible installed copies as a fallback and identify their revision when possible. If required guidance is unavailable, report which files or references need access before implementing the affected work.
 4. Check the application's manifest, lockfile, and installed package exports and types for compatibility before applying upstream examples. If the guidance describes an API unavailable in the installed version, report the mismatch. Preserve the application's dependency versions unless an upgrade is requested.
 
+## Review Jails changes before delivery
+
+Review additions, edits, and removals against the resolved `jails` conventions and the relevant module contracts. Inspect the actual diff and the resulting affected code. For removals, check remaining callers, registrations, and bindings where applicable. Correct introduced deviations and verify affected mounting, interactions, state updates, and cleanup as applicable.
+
 ## Optional installation
 
 To install the current upstream skills into the destination project, run from that project:

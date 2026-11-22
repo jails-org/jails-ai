@@ -30,6 +30,8 @@ Read [the upstream skill catalog](standards/upstream-skills.md), resolve and rea
 
 Read [the shared Tailwind standard](standards/tailwind.md) before creating or modifying styles. Use built-in classes; visual fidelity does not authorize customizations. If a required design detail conflicts with this standard, explain the constraint and obtain explicit developer direction before customizing.
 
+For asynchronous operations and form submissions, read [the async patterns guide](standards/async-patterns.md) to understand when and how to use `cancelable` from `jails.stdlib/cancelable` for handling request cancellation and preventing race conditions.
+
 Use `ui-clean-arch` for application organization, `jails` for component behavior, and `jails-stdlib` for module contracts. Check examples against installed package versions. If required guidance is inaccessible, follow the catalog's resolution procedure rather than inventing APIs.
 
 ## Shared SVG and icon convention

@@ -1,13 +1,13 @@
 ---
 name: jails-ai-extension
-description: Save or update reusable guidance in a Jails.ai application so other Jails.ai skills apply the project's design system, component conventions, tooling, and other project-specific practices.
+description: Save and update reusable guidance in a Jails.ai application. Use automatically when the developer introduces or corrects durable project-specific knowledge during another task, such as design system usage, component conventions, tooling, or performance budgets. An explicit save request is optional.
 ---
 
 # jails-ai Extension
 
-Invoke with `/jails-ai-extension` in GitHub Copilot Chat or `$jails-ai-extension` in agents supporting dollar mentions.
+Select this skill automatically when the developer shares confirmed project guidance that should be reused in future tasks. Capture it as part of the current task and continue the original work. For explicit use, invoke with `/jails-ai-extension` in GitHub Copilot Chat or `$jails-ai-extension` in agents supporting dollar mentions.
 
-Capture project practices that should carry across tasks. Read [the project extensions standard](references/standards/project-extensions.md) for the storage and discovery contract shared by the Jails.ai skills.
+Read [the project extensions standard](references/standards/project-extensions.md) for implicit capture, storage, and discovery across the Jails.ai skills.
 
 ## Inspect the project and sources
 

@@ -159,6 +159,8 @@ For font-related layout shifts, the skill preserves the intended design and does
 
 The skill saves the guidance in the application, for example in `.jails-ai/extensions/design-system.md`, and registers it in `.jails-ai/extensions/readme.md`. Setup, specification, mock, and performance workflows check that index and load entries relevant to their work. Install the updated versions of those skills to use this behavior in an existing workspace. See the [project extensions standard](standards/project-extensions.md).
 
+Jails.ai also captures confirmed conventions shared during ordinary work. If you say “All forms in this app use the shared Field component” while requesting a screen, the workflow records the convention and continues building the screen. Instructions scoped to a single task stay with that task.
+
 ## Architecture that supports review
 
 A clear architecture gives both the agent and the reviewer a shared map of the application.
